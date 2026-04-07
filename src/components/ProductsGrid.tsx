@@ -29,10 +29,10 @@ export default function ProductsGrid({ content, title = '产品中心', subtitle
               <button
                 type="button"
                 className="relative block h-56 w-full overflow-hidden"
-                onClick={() => setPreview({ src: product.image, alt: product.name })}
+                onClick={() => setPreview({ src: product.images?.[0] || product.image, alt: product.name })}
               >
                 <Image
-                  src={product.image}
+                  src={product.images?.[0] || product.image}
                   alt={product.name}
                   fill
                   className="object-cover transition duration-300 group-hover:scale-105"
@@ -45,6 +45,20 @@ export default function ProductsGrid({ content, title = '产品中心', subtitle
               <div className="p-5">
                 <h3 className="text-base font-semibold tracking-wide text-navy">{product.name}</h3>
                 <p className="mt-2 text-sm leading-7 text-slate-600">{product.note}</p>
+                {product.images && product.images.length > 1 ? (
+                  <div className="mt-3 grid grid-cols-4 gap-2">
+                    {product.images.slice(0, 4).map((img, idx) => (
+                      <button
+                        key={`${product.name}-${idx}`}
+                        type="button"
+                        className="relative h-12 overflow-hidden rounded border border-slate-200"
+                        onClick={() => setPreview({ src: img, alt: `${product.name}-${idx + 1}` })}
+                      >
+                        <Image src={img} alt={`${product.name}-${idx + 1}`} fill className="object-cover" sizes="120px" />
+                      </button>
+                    ))}
+                  </div>
+                ) : null}
               </div>
             </article>
           ))}

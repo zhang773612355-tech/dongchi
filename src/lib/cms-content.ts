@@ -6,6 +6,11 @@ import { getSiteContent } from '@/data/site';
 const STORE_PATH = path.join(process.cwd(), 'data', 'admin-content.json');
 
 type Overrides = {
+  productsCatalog?: Array<{
+    name: string;
+    note: string;
+    images: string[];
+  }>;
   products?: Record<number, string>;
   certificates?: Record<number, string>;
   exhibitions?: Record<number, string>;
@@ -59,14 +64,52 @@ export const updateImageOverride = async (slotKey: string, imagePath: string) =>
   await writeOverrides(data);
 };
 
+export const createProduct = async (payload: { name: string; note: string; images: string[] }) => {
+  const data = await readOverrides();
+  const products = [...(data.productsCatalog || [])];
+  products.push({
+    name: payload.name.trim(),
+    note: payload.note.trim() || '后台新增产品',
+    images: payload.images
+  });
+  data.productsCatalog = products;
+  await writeOverrides(data);
+};
+
+export const appendProductImages = async (index: number, images: string[]) => {
+  const data = await readOverrides();
+  const baseProducts = data.productsCatalog || [];
+  if (!baseProducts[index]) return;
+  baseProducts[index].images = [...(baseProducts[index].images || []), ...images];
+  data.productsCatalog = baseProducts;
+  await writeOverrides(data);
+};
+
 export const getManagedSiteContent = async (locale: 'zh' | 'en' = 'zh'): Promise<SiteContent> => {
   const base = structuredClone(getSiteContent(locale));
   const ov = await readOverrides();
 
+  if (ov.productsCatalog && ov.productsCatalog.length > 0) {
+    base.products = ov.productsCatalog.map((item) => ({
+      name: item.name,
+      note: item.note,
+      images: item.images,
+      image: item.images[0] || '/images/products/abs-washer-cover-real.jpg'
+    }));
+  } else {
+    base.products = base.products.map((p) => ({
+      ...p,
+      images: p.images?.length ? p.images : [p.image]
+    }));
+  }
+
   if (ov.products) {
     Object.entries(ov.products).forEach(([idx, image]) => {
       const i = Number(idx);
-      if (base.products[i]) base.products[i].image = image;
+      if (base.products[i]) {
+        base.products[i].image = image;
+        base.products[i].images = [image, ...(base.products[i].images || []).slice(1)];
+      }
     });
   }
 

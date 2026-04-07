@@ -57,7 +57,7 @@ export default function ProductCarousel({ content }: ProductCarouselProps) {
                 }`}
               >
                 <Image
-                  src={product.image}
+                  src={product.images?.[0] || product.image}
                   alt={product.name}
                   fill
                   className="object-cover"

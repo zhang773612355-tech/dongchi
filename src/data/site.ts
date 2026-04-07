@@ -13,6 +13,7 @@ export type ServiceItem = {
 export type ProductItem = {
   name: string;
   image: string;
+  images: string[];
   note: string;
 };
 
@@ -120,26 +121,31 @@ const zh: SiteContent = {
     {
       name: 'ABS洗衣机上盖料',
       image: '/images/products/abs-washer-cover-real.jpg',
+      images: ['/images/products/abs-washer-cover-real.jpg'],
       note: '适用于家电再生料渠道，来源稳定。'
     },
     {
       name: '白色ABS破碎料',
       image: '/images/products/abs-white-real.jpg',
+      images: ['/images/products/abs-white-real.jpg'],
       note: '白度表现稳定，适配常规再生应用。'
     },
     {
       name: '黑花ABS破碎料',
       image: '/images/products/abs-black-mix-real.jpg',
+      images: ['/images/products/abs-black-mix-real.jpg'],
       note: '黑花混合材质，支持分选与定向供货。'
     },
     {
       name: '黑色ABS破碎料',
       image: '/images/products/abs-black-real.jpg',
+      images: ['/images/products/abs-black-real.jpg'],
       note: '规格清晰，支持批量供需对接。'
     },
     {
       name: '花色ABS破碎料',
       image: '/images/products/abs-color-mix-real.jpg',
+      images: ['/images/products/abs-color-mix-real.jpg'],
       note: '花色混合破碎料，按需匹配下游工艺。'
     }
   ],

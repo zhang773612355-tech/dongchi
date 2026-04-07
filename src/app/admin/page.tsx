@@ -82,9 +82,76 @@ export default async function AdminPage({
         <div className="space-y-10">
           <section>
             <h2 className="mb-3 text-lg font-semibold text-navy">产品图片</h2>
+            <div className="mb-5 rounded-xl border border-slate-200 bg-slate-50 p-4">
+              <h3 className="text-sm font-semibold text-navy">新增产品（支持多图）</h3>
+              <form
+                action="/api/admin/products/create"
+                method="post"
+                encType="multipart/form-data"
+                className="mt-3 grid gap-3 sm:grid-cols-2"
+              >
+                <input
+                  name="name"
+                  required
+                  placeholder="产品名称（例如：白色ABS破碎料）"
+                  className="h-10 rounded-md border border-slate-300 px-3 text-sm"
+                />
+                <input
+                  name="note"
+                  placeholder="产品说明（可选）"
+                  className="h-10 rounded-md border border-slate-300 px-3 text-sm"
+                />
+                <input
+                  type="file"
+                  name="images"
+                  multiple
+                  required
+                  accept="image/png,image/jpeg,image/webp"
+                  className="sm:col-span-2 block w-full text-xs text-slate-600 file:mr-3 file:rounded file:border-0 file:bg-white file:px-3 file:py-2"
+                />
+                <button
+                  type="submit"
+                  className="sm:col-span-2 w-fit rounded-md bg-navy px-4 py-2 text-xs font-semibold text-white"
+                >
+                  新增产品并上传图片
+                </button>
+              </form>
+            </div>
+
             <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
               {content.products.map((item, idx) => (
-                <UploadCard key={item.name} title={item.name} image={item.image} slotKey={`product:${idx}`} />
+                <article key={item.name} className="rounded-xl border border-slate-200 bg-white p-4 shadow-panel">
+                  <h3 className="text-sm font-semibold text-navy">{item.name}</h3>
+                  <p className="mt-1 text-xs text-slate-500">{item.note}</p>
+
+                  <div className="mt-3 grid grid-cols-3 gap-2">
+                    {item.images?.map((img, i) => (
+                      <div key={`${item.name}-${i}`} className="relative h-20 overflow-hidden rounded border border-slate-200 bg-slate-100">
+                        <Image src={img} alt={`${item.name}-${i + 1}`} fill className="object-cover" sizes="120px" />
+                      </div>
+                    ))}
+                  </div>
+
+                  <form
+                    action="/api/admin/products/add-images"
+                    method="post"
+                    encType="multipart/form-data"
+                    className="mt-3 space-y-2"
+                  >
+                    <input type="hidden" name="productIndex" value={String(idx)} />
+                    <input
+                      type="file"
+                      name="images"
+                      multiple
+                      required
+                      accept="image/png,image/jpeg,image/webp"
+                      className="block w-full text-xs text-slate-600 file:mr-3 file:rounded file:border-0 file:bg-slate-100 file:px-3 file:py-2"
+                    />
+                    <button type="submit" className="rounded-md bg-navy px-3 py-2 text-xs font-semibold text-white">
+                      追加图片
+                    </button>
+                  </form>
+                </article>
               ))}
             </div>
           </section>
