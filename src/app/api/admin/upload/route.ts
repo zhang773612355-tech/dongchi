@@ -24,7 +24,10 @@ const folderFromSlot = (slotKey: string) => {
 export async function POST(request: Request) {
   const token = cookies().get(getSessionCookieName())?.value;
   if (!verifySessionToken(token)) {
-    return NextResponse.redirect(new URL('/admin/login', request.url));
+    return new NextResponse(null, {
+      status: 303,
+      headers: { Location: '/admin/login' }
+    });
   }
 
   const formData = await request.formData();
@@ -32,7 +35,10 @@ export async function POST(request: Request) {
   const file = formData.get('image');
 
   if (!slotKey || !(file instanceof File) || file.size === 0) {
-    return NextResponse.redirect(new URL('/admin?error=upload', request.url));
+    return new NextResponse(null, {
+      status: 303,
+      headers: { Location: '/admin?error=upload' }
+    });
   }
 
   const arrayBuffer = await file.arrayBuffer();
@@ -49,5 +55,8 @@ export async function POST(request: Request) {
   const publicPath = `/uploads/${folder}/${filename}`;
   await updateImageOverride(slotKey, publicPath);
 
-  return NextResponse.redirect(new URL(`/admin?updated=${encodeURIComponent(slotKey)}`, request.url));
+  return new NextResponse(null, {
+    status: 303,
+    headers: { Location: `/admin?updated=${encodeURIComponent(slotKey)}` }
+  });
 }
