@@ -1,0 +1,98 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  color-scheme: light;
+  --dc-navy-900: #081a2d;
+  --dc-navy-800: #0f2740;
+  --dc-steel-700: #1d3e61;
+  --dc-mint-500: #1ca16a;
+  --dc-amber-500: #e47f1f;
+  --dc-bg: #edf2f7;
+  --dc-panel: #f7fafc;
+  --dc-line: #d6deea;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html,
+body {
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: "Rajdhani", "Noto Sans SC", "Microsoft YaHei", sans-serif;
+  background:
+    radial-gradient(circle at 15% 0%, rgba(28, 161, 106, 0.09), transparent 35%),
+    radial-gradient(circle at 85% 0%, rgba(228, 127, 31, 0.08), transparent 28%),
+    var(--dc-bg);
+  color: var(--dc-navy-800);
+}
+
+a {
+  text-underline-offset: 3px;
+}
+
+.container-shell {
+  @apply mx-auto w-full max-w-7xl px-4 sm:px-6 lg:px-8;
+}
+
+.section-title {
+  @apply text-2xl font-semibold tracking-wide text-navy sm:text-3xl;
+  letter-spacing: 0.02em;
+}
+
+.section-subtitle {
+  @apply mt-3 max-w-3xl text-sm leading-7 text-slate-600 sm:text-base;
+}
+
+.section-frame {
+  @apply rounded-2xl border bg-white shadow-panel;
+  border-color: var(--dc-line);
+}
+
+.industrial-tag {
+  @apply inline-flex items-center rounded-full border px-3 py-1 text-xs font-medium;
+  border-color: rgba(255, 255, 255, 0.3);
+  background: rgba(255, 255, 255, 0.08);
+}
+
+.reveal-up {
+  animation: revealUp 420ms ease-out both;
+}
+
+.reveal-delay-1 {
+  animation-delay: 70ms;
+}
+
+.reveal-delay-2 {
+  animation-delay: 130ms;
+}
+
+.reveal-delay-3 {
+  animation-delay: 190ms;
+}
+
+@keyframes revealUp {
+  from {
+    opacity: 0;
+    transform: translateY(14px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .reveal-up,
+  .reveal-delay-1,
+  .reveal-delay-2,
+  .reveal-delay-3 {
+    animation: none;
+  }
+}
