@@ -4,6 +4,8 @@ import ServicesSection from '@/components/ServicesSection';
 import StrengthSection from '@/components/StrengthSection';
 import { getManagedSiteContent } from '@/lib/cms-content';
 
+export const dynamic = 'force-dynamic';
+
 export const metadata: Metadata = {
   title: '业务范围 | 河北东驰静电分选厂',
   description: 'ABS / PS 静电分选、再生塑料分选加工与原料采购业务介绍。'

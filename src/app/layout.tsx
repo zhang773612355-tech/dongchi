@@ -5,6 +5,8 @@ import Footer from '@/components/Footer';
 import FloatingActions from '@/components/FloatingActions';
 import { getManagedSiteContent } from '@/lib/cms-content';
 
+export const dynamic = 'force-dynamic';
+
 export const metadata: Metadata = {
   metadataBase: new URL('https://dongchi.example.com'),
   title: '河北东驰静电分选厂 | 再生塑料分选加工',

@@ -4,6 +4,8 @@ import ProductsGrid from '@/components/ProductsGrid';
 import ContactSection from '@/components/ContactSection';
 import { getManagedSiteContent } from '@/lib/cms-content';
 
+export const dynamic = 'force-dynamic';
+
 export const metadata: Metadata = {
   title: '产品中心 | 河北东驰静电分选厂',
   description: 'ABS洗衣机上盖料、白色/黑色/花色 ABS 破碎料等产品展示。'

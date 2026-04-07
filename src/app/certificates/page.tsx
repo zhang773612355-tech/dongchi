@@ -4,6 +4,8 @@ import CertificatesSection from '@/components/CertificatesSection';
 import ExhibitionGallery from '@/components/ExhibitionGallery';
 import { getManagedSiteContent } from '@/lib/cms-content';
 
+export const dynamic = 'force-dynamic';
+
 export const metadata: Metadata = {
   title: '资质与展会 | 河北东驰静电分选厂',
   description: '展示注册商标证、企业主体信息以及展会现场素材。'

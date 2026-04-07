@@ -3,6 +3,8 @@ import PageHero from '@/components/PageHero';
 import ContactSection from '@/components/ContactSection';
 import { getManagedSiteContent } from '@/lib/cms-content';
 
+export const dynamic = 'force-dynamic';
+
 export const metadata: Metadata = {
   title: '联系我们 | 河北东驰静电分选厂',
   description: '电话、微信、在线表单三种方式快速发起询盘。'

@@ -8,6 +8,8 @@ import ExhibitionGallery from '@/components/ExhibitionGallery';
 import ContactSection from '@/components/ContactSection';
 import { getManagedSiteContent } from '@/lib/cms-content';
 
+export const dynamic = 'force-dynamic';
+
 export default async function HomePage() {
   const content = await getManagedSiteContent('zh');
 

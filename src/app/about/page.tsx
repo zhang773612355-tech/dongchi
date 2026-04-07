@@ -3,6 +3,8 @@ import Image from 'next/image';
 import PageHero from '@/components/PageHero';
 import { getManagedSiteContent } from '@/lib/cms-content';
 
+export const dynamic = 'force-dynamic';
+
 export const metadata: Metadata = {
   title: '关于我们 | 河北东驰静电分选厂',
   description: '了解河北东驰静电分选厂的企业主体、产线能力与服务定位。'
